@@ -1,8 +1,8 @@
-# Agent-Assisted Game Development Framework
+# Agent-Assisted Software Development Framework
 
-**Version:** 1.0  
-**Last Updated:** 2025-10-31  
-**Purpose:** Documentation package for AI-assisted solo game development
+**Version:** 1.0
+**Last Updated:** 2025-10-31
+**Purpose:** Documentation package for AI-assisted solo software development
 
 ---
 
@@ -10,7 +10,7 @@
 
 ### For Your First Project
 
-1. **Copy this entire `/docs` folder** into your new game project
+1. **Copy this entire `/docs` folder** into your new application project
 2. **Read** `AgentRoles.md` to understand the workflow
 3. **Copy** templates and remove the `_TEMPLATE` suffix:
    - `ProjectPlan_TEMPLATE.md` → `ProjectPlan.md`
@@ -58,7 +58,7 @@
 Recommended project structure with these docs:
 
 ```
-your-game-project/
+your-application-project/
 ├── docs/
 │   ├── README.md                          # This file
 │   ├── AgentRoles.md                      # Role definitions
@@ -69,13 +69,13 @@ your-game-project/
 │   ├── Handoff.md                         # Session handoff
 │   └── Standards-FeatureExpansion.md      # Future ideas
 ├── src/
-│   ├── scenes/
-│   ├── entities/
-│   ├── systems/
+│   ├── pages/
+│   ├── components/
+│   ├── services/
 │   └── main.js
-├── assets/
-│   ├── sprites/
-│   ├── audio/
+├── public/
+│   ├── images/
+│   ├── fonts/
 │   └── data/                              # JSON data files
 ├── package.json
 └── index.html
@@ -548,4 +548,4 @@ This is a **living framework** meant to evolve with your needs.
 
 ---
 
-Good luck with your game development! 🎮
+Good luck with your software development! 🚀

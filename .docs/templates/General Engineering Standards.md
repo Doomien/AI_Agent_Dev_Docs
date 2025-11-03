@@ -1,7 +1,7 @@
 # General Engineering Standards
-## Web-Based Game Development
+## Web-Based Software Development
 
-This document outlines engineering standards and best practices for web-based game projects, regardless of engine choice (Phaser, Godot, GameMaker, custom engines, etc.).
+This document outlines engineering standards and best practices for web-based software projects, regardless of framework choice (React, Vue, Angular, Next.js, Express, etc.).
 
 ---
 
@@ -20,52 +20,55 @@ This document outlines engineering standards and best practices for web-based ga
 
 ## Data-Driven Design
 
-**Principle:** Separate game data from game logic.
+**Principle:** Separate application data from application logic.
 
--   **Game Logic:** The *how* of the game (rendering, physics, damage calculation)
--   **Game Data:** The *what* of the game (character stats, animation frames, weapon damage)
+-   **Application Logic:** The *how* of the application (rendering, validation, calculations)
+-   **Application Data:** The *what* of the application (configuration, content, business rules)
 
 **Benefits:**
--   Modify game balance without changing code
+-   Modify application behavior without changing code
 -   Allow non-programmers to contribute content
 -   Improve scalability and maintainability
 
 ### Example Structure
 
-**Character Configuration (JSON):**
+**Feature Configuration (JSON):**
 ```json
 {
-  "characterId": "player",
-  "stats": {
-    "hp": 100,
-    "speed": 120,
-    "jumpForce": 400,
-    "attackDamage": 10
+  "featureId": "user-dashboard",
+  "settings": {
+    "maxItems": 100,
+    "refreshInterval": 5000,
+    "enableNotifications": true,
+    "theme": "light"
   },
-  "animations": {
-    "idle": { "frames": [0, 1, 2, 3], "frameRate": 8 },
-    "walk": { "frames": [4, 5, 6, 7], "frameRate": 12 }
+  "widgets": {
+    "chart": { "type": "line", "dataSource": "analytics" },
+    "stats": { "type": "summary", "metrics": ["users", "revenue"] }
   }
 }
 ```
 
-**Level Configuration:**
+**Form Configuration:**
 ```json
 {
-  "levelId": "level_1",
-  "tileSize": 32,
-  "platforms": [...],
-  "enemies": [...],
-  "spawns": { "player": { "x": 100, "y": 300 } }
+  "formId": "user_registration",
+  "fields": [
+    { "name": "email", "type": "email", "required": true },
+    { "name": "password", "type": "password", "minLength": 8 }
+  ],
+  "validation": {
+    "email": { "pattern": "^[^@]+@[^@]+\\.[^@]+$" }
+  }
 }
 ```
 
 ### Data File Locations
 
-- **Game Data:** `data/` or `assets/data/`
+- **Application Data:** `data/` or `config/`
 - **Configuration:** `config/`
-- **Level Definitions:** `data/levels/`
-- **Entity Data:** `data/entities/`
+- **Feature Definitions:** `data/features/`
+- **Schema Definitions:** `data/schemas/`
 
 ---
 
@@ -76,17 +79,17 @@ This document outlines engineering standards and best practices for web-based ga
 ```
 project/
 ├── src/                 # Source code
-│   ├── scenes/          # Game scenes/states
-│   ├── entities/        # Game objects (player, enemies, items)
-│   ├── systems/         # Core systems (managers, loaders)
-│   ├── ui/              # User interface components
+│   ├── pages/           # Page components/routes
+│   ├── components/      # Reusable UI components
+│   ├── services/        # Business logic and API calls
+│   ├── hooks/           # Custom React hooks (if using React)
 │   ├── utils/           # Utility functions
 │   └── main.js          # Entry point
-├── assets/              # Game assets
-│   ├── sprites/
-│   ├── audio/
+├── public/              # Static assets
+│   ├── images/
+│   ├── fonts/
 │   └── data/           # JSON data files
-├── styles/              # CSS (if applicable)
+├── styles/              # CSS/styling files
 └── index.html           # HTML entry point
 ```
 
@@ -103,13 +106,13 @@ project/
 **Examples:**
 ```
 ✅ GOOD:
-  src/entities/Player.js
-  src/systems/AudioManager.js
-  src/scenes/GameScene.js
+  src/components/UserProfile.js
+  src/services/AuthService.js
+  src/pages/Dashboard.js
 
 ❌ BAD:
   src/everything.js
-  src/player_and_enemies.js
+  src/user_and_auth.js
 ```
 
 ### Code Structure
@@ -144,19 +147,19 @@ class ClassName {
 
 ### Separation of Concerns
 
-**Scene/State Responsibilities:**
-- Scene setup and cleanup
-- Coordinate between systems
-- **Don't:** Put game logic in scenes
+**Page/Route Responsibilities:**
+- Page layout and composition
+- Coordinate between components
+- **Don't:** Put business logic in pages
 
-**Entity Responsibilities:**
-- Entity-specific behavior
-- State management
-- **Don't:** Access global state directly
+**Component Responsibilities:**
+- Component-specific behavior
+- Local state management
+- **Don't:** Access global state directly (use context/store)
 
-**System Responsibilities:**
+**Service Responsibilities:**
 - Manage shared resources
-- Provide services to entities
+- Provide services to components
 - **Don't:** Create tight coupling
 
 ---
@@ -176,20 +179,20 @@ function calculateDamage(base, multiplier) {
 }
 ```
 
-**Classes:**
+**Classes/Components:**
 ```javascript
 // PascalCase
-class Player { }
-class AudioManager { }
-class GameScene { }
+class UserProfile { }
+class DataManager { }
+class Dashboard { }
 ```
 
 **Constants:**
 ```javascript
 // SCREAMING_SNAKE_CASE
-const GAME_WIDTH = 1280;
-const GAME_HEIGHT = 720;
-const MAX_VELOCITY = 200;
+const API_BASE_URL = 'https://api.example.com';
+const MAX_RETRIES = 3;
+const TIMEOUT_MS = 5000;
 ```
 
 **Private Members:**
@@ -207,42 +210,42 @@ class Example {
 **Booleans:**
 ```javascript
 // Use descriptive prefixes
-let isGrounded = true;
-let hasKey = false;
-let canJump = true;
-let shouldUpdate = false;
+let isAuthenticated = true;
+let hasPermission = false;
+let canSubmit = true;
+let shouldRefresh = false;
 ```
 
 ### Files and Directories
 
 **JavaScript Files:**
-- Classes: PascalCase (`Player.js`, `AudioManager.js`)
-- Utilities: kebab-case (`animation-loader.js`, `input-handler.js`)
+- Components: PascalCase (`UserProfile.js`, `DataManager.js`)
+- Utilities: kebab-case (`api-client.js`, `validation-helpers.js`)
 - Entry points: lowercase (`main.js`, `config.js`)
 
 **HTML/CSS Files:**
 - kebab-case (`game.html`, `styles.css`, `debug-panel.html`)
 
 **JSON Data:**
-- kebab-case (`character-data.json`, `level-config.json`)
+- kebab-case (`user-config.json`, `form-schema.json`)
 
 **Directories:**
-- lowercase, singular (`entity/`, `system/`, `scene/`)
+- lowercase, singular (`component/`, `service/`, `page/`)
 
 ### Asset Naming
 
 **Use hierarchical, descriptive names:**
 ```javascript
-// Sprites
-'player-idle', 'player-walk-right'
-'enemy-goblin-attack', 'enemy-goblin-death'
+// Images
+'logo-primary', 'icon-user-small'
+'banner-hero-desktop', 'banner-hero-mobile'
 
-// Audio
-'sfx-jump', 'sfx-explosion'
-'music-menu', 'music-gameplay'
+// Icons
+'icon-check', 'icon-warning'
+'icon-menu', 'icon-close'
 
-// Levels
-'level-1-forest', 'level-2-cave'
+// Data files
+'config-production', 'config-development'
 ```
 
 ---
@@ -270,27 +273,27 @@ let shouldUpdate = false;
 
 ```javascript
 /**
- * Player - Main player character controller
+ * UserProfile - User profile management component
  *
- * Handles player movement, jumping, attacking, and health.
- * Interacts with collision system and input manager.
+ * Handles user data display, editing, and validation.
+ * Interacts with authentication service and API layer.
  */
-class Player {
+class UserProfile {
   /**
-   * Create a new player
-   * @param {number} x - Initial X position
-   * @param {number} y - Initial Y position
-   * @param {Object} config - Player configuration data
+   * Create a new user profile component
+   * @param {Object} props - Component props
+   * @param {Object} user - User data object
+   * @param {Object} config - Component configuration
    */
-  constructor(x, y, config) {
+  constructor(props, user, config) {
     // ...
   }
 
   /**
-   * Update player state
-   * @param {number} deltaTime - Time elapsed since last frame (ms)
+   * Update component state
+   * @param {Object} newData - Updated user data
    */
-  update(deltaTime) {
+  update(newData) {
     // ...
   }
 }
@@ -314,14 +317,14 @@ velocity = MAX_VELOCITY;
 **Complex Algorithms:**
 ```javascript
 /**
- * Calculate damage with critical hit chance
+ * Calculate discounted price with promo code
  *
- * Formula: base * multiplier * (1 + critChance * critMultiplier)
- * Critical hits have 20% chance to deal 2x damage
+ * Formula: price * (1 - discountPercent) * quantity
+ * Promo codes can provide up to 50% discount
  */
-function calculateDamage(base, multiplier, critChance) {
-  const isCrit = Math.random() < critChance;
-  return base * multiplier * (isCrit ? 2.0 : 1.0);
+function calculateTotal(price, quantity, promoCode) {
+  const discount = validatePromoCode(promoCode);
+  return price * (1 - discount) * quantity;
 }
 ```
 
@@ -339,109 +342,92 @@ function calculateDamage(base, multiplier, critChance) {
 
 ## Performance Optimization
 
-### Object Pooling
+### Component Memoization
 
-**Reuse objects instead of creating/destroying:**
+**Prevent unnecessary re-renders:**
 ```javascript
-// ❌ BAD: Create new bullets constantly
-update() {
-  if (shooting) {
-    const bullet = new Bullet(x, y);
-    bullets.push(bullet);
-  }
+// ❌ BAD: Component re-renders on every parent update
+function UserList({ users }) {
+  return users.map(user => <UserCard key={user.id} user={user} />);
 }
 
-// ✅ GOOD: Object pool
-class BulletPool {
-  constructor(size) {
-    this.pool = Array(size).fill(null).map(() => new Bullet());
-    this.activeIndex = 0;
-  }
-
-  get() {
-    const bullet = this.pool[this.activeIndex];
-    this.activeIndex = (this.activeIndex + 1) % this.pool.length;
-    return bullet;
-  }
-}
-```
-
-### Texture/Sprite Atlases
-
-**Combine sprites into single texture:**
-- Reduces draw calls
-- Improves rendering performance
-- Use tools like TexturePacker or Aseprite
-
-### Culling
-
-**Don't update off-screen objects:**
-```javascript
-update(deltaTime) {
-  // Only update if visible
-  if (this.isInViewport()) {
-    this.updateBehavior(deltaTime);
-  }
-}
-
-isInViewport() {
-  return this.x >= camera.left &&
-         this.x <= camera.right &&
-         this.y >= camera.top &&
-         this.y <= camera.bottom;
-}
-```
-
-### Efficient Collision Detection
-
-**Use spatial partitioning:**
-- Quadtrees for 2D games
-- Octrees for 3D games
-- Grid-based collision for tile-based games
-
-**Avoid checking all entities:**
-```javascript
-// ❌ BAD: Check every entity against every other (O(n²))
-for (let i = 0; i < entities.length; i++) {
-  for (let j = 0; j < entities.length; j++) {
-    checkCollision(entities[i], entities[j]);
-  }
-}
-
-// ✅ GOOD: Use spatial partitioning or layers
-const nearbyEntities = quadtree.query(entity.bounds);
-nearbyEntities.forEach(other => {
-  checkCollision(entity, other);
+// ✅ GOOD: Memoize expensive components
+const UserCard = React.memo(function UserCard({ user }) {
+  return <div>{user.name}</div>;
 });
+
+function UserList({ users }) {
+  return users.map(user => <UserCard key={user.id} user={user} />);
+}
+```
+
+### Asset Optimization
+
+**Optimize images and resources:**
+- Use appropriate image formats (WebP, AVIF)
+- Lazy load images below the fold
+- Use CDN for static assets
+
+### Virtual Scrolling
+
+**Don't render off-screen items:**
+```javascript
+// ✅ GOOD: Only render visible items
+function VirtualList({ items, itemHeight }) {
+  const [scrollTop, setScrollTop] = useState(0);
+  const viewportHeight = 600;
+
+  const startIndex = Math.floor(scrollTop / itemHeight);
+  const endIndex = Math.ceil((scrollTop + viewportHeight) / itemHeight);
+  const visibleItems = items.slice(startIndex, endIndex);
+
+  return visibleItems.map(item => <Item key={item.id} data={item} />);
+}
+```
+
+### Efficient Data Fetching
+
+**Avoid redundant API calls:**
+- Cache responses when appropriate
+- Use pagination for large datasets
+- Implement debouncing for search inputs
+
+**Batch requests:**
+```javascript
+// ❌ BAD: Multiple individual requests
+for (let id of userIds) {
+  await fetchUser(id);
+}
+
+// ✅ GOOD: Batch request
+const users = await fetchUsers(userIds);
 ```
 
 ### Performance Monitoring
 
 ```javascript
-// Track frame rate
-let lastTime = performance.now();
-let frameCount = 0;
-let fps = 0;
+// Track render performance
+function usePerformanceMonitor() {
+  useEffect(() => {
+    const observer = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        if (entry.duration > 100) {
+          console.warn('Slow render:', entry.name, entry.duration);
+        }
+      }
+    });
 
-function gameLoop() {
-  const currentTime = performance.now();
-  const deltaTime = currentTime - lastTime;
-
-  frameCount++;
-  if (currentTime - lastTime >= 1000) {
-    fps = frameCount;
-    frameCount = 0;
-    lastTime = currentTime;
-
-    if (fps < 50) {
-      console.warn('Low FPS:', fps);
-    }
-  }
-
-  update(deltaTime);
-  render();
-  requestAnimationFrame(gameLoop);
+    observer.observe({ entryTypes: ['measure'] });
+    return () => observer.disconnect();
+  }, []);
 }
+
+// Use Web Vitals
+import { getCLS, getFID, getFCP } from 'web-vitals';
+
+getCLS(console.log);
+getFID(console.log);
+getFCP(console.log);
 ```
 
 ---
@@ -452,22 +438,22 @@ function gameLoop() {
 
 **Create test lists for each feature:**
 ```markdown
-## Player Movement Test
-- [ ] Walk left (smooth movement)
-- [ ] Walk right (smooth movement)
-- [ ] Jump (reaches expected height)
-- [ ] Can't double-jump
-- [ ] Falls with gravity
-- [ ] Lands on platforms correctly
+## User Authentication Test
+- [ ] Login with valid credentials (successful)
+- [ ] Login with invalid credentials (shows error)
+- [ ] Logout (clears session)
+- [ ] Token refresh (maintains session)
+- [ ] Protected routes (redirect if not authenticated)
+- [ ] Password reset flow (email sent)
 ```
 
 ### DevTools for Testing
 
 **Build isolated test pages:**
-- Animation viewer
-- Sprite editor
-- Level editor
-- Collision visualizer
+- Component playground
+- API response viewer
+- Form validator
+- State debugger
 
 **Benefits:**
 - Test features in isolation
@@ -478,14 +464,14 @@ function gameLoop() {
 
 **Use consistent prefixes:**
 ```javascript
-console.log('[Player] Initialized at', x, y);
-console.warn('[AudioManager] Failed to load sound:', filename);
-console.error('[CollisionSystem] Null entity detected');
+console.log('[Auth] User logged in:', userId);
+console.warn('[API] Request failed:', endpoint);
+console.error('[Validation] Invalid data:', data);
 
 // Debug flags
-const DEBUG_PHYSICS = true;
-if (DEBUG_PHYSICS) {
-  console.log('[Physics] Velocity:', this.velocity);
+const DEBUG_API = true;
+if (DEBUG_API) {
+  console.log('[API] Response:', response.data);
 }
 ```
 
@@ -583,6 +569,7 @@ class DebugOverlay {
       position: fixed; top: 10px; left: 10px;
       background: rgba(0,0,0,0.8); color: #0f0;
       padding: 10px; font-family: monospace;
+      z-index: 9999;
     `;
     document.body.appendChild(this.element);
   }
@@ -591,9 +578,9 @@ class DebugOverlay {
     if (!this.enabled) return;
 
     this.element.textContent = [
-      `FPS: ${data.fps}`,
-      `Player: (${data.playerX}, ${data.playerY})`,
-      `Entities: ${data.entityCount}`,
+      `Render time: ${data.renderTime}ms`,
+      `API calls: ${data.apiCalls}`,
+      `Active users: ${data.userCount}`,
       `Memory: ${data.memoryMB} MB`
     ].join('\n');
   }
@@ -617,28 +604,29 @@ document.addEventListener('keydown', (e) => {
 **Global debug utilities:**
 ```javascript
 window.DEBUG = {
-  game: null, // Set to game instance
+  app: null, // Set to app instance
 
-  teleport(x, y) {
-    this.game.player.setPosition(x, y);
+  setUser(userId) {
+    this.app.auth.setUser({ id: userId });
   },
 
-  giveItem(itemId) {
-    this.game.player.inventory.add(itemId);
+  clearCache() {
+    localStorage.clear();
+    sessionStorage.clear();
   },
 
-  killAllEnemies() {
-    this.game.enemies.forEach(e => e.destroy());
+  simulateError() {
+    throw new Error('Simulated error for testing');
   },
 
-  toggleGodMode() {
-    this.game.player.invincible = !this.game.player.invincible;
+  toggleFeatureFlag(flag) {
+    this.app.features[flag] = !this.app.features[flag];
   }
 };
 
 // Usage in browser console:
-// DEBUG.teleport(500, 300)
-// DEBUG.giveItem('sword')
+// DEBUG.setUser(123)
+// DEBUG.clearCache()
 ```
 
 ### Error Handling
@@ -646,30 +634,30 @@ window.DEBUG = {
 **Graceful failures:**
 ```javascript
 // ✅ GOOD: Try-catch with fallback
-async function loadLevel(levelId) {
+async function fetchUserData(userId) {
   try {
-    const response = await fetch(`data/levels/${levelId}.json`);
+    const response = await fetch(`/api/users/${userId}`);
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
     }
     return await response.json();
   } catch (error) {
-    console.error(`Failed to load level ${levelId}:`, error);
-    return getDefaultLevel(); // Fallback
+    console.error(`Failed to fetch user ${userId}:`, error);
+    return getDefaultUserData(); // Fallback
   }
 }
 
 // ❌ BAD: Unhandled errors
-async function loadLevel(levelId) {
-  const response = await fetch(`data/levels/${levelId}.json`);
+async function fetchUserData(userId) {
+  const response = await fetch(`/api/users/${userId}`);
   return await response.json(); // Will crash on error
 }
 ```
 
 **Validate data:**
 ```javascript
-function validateConfig(data) {
-  const required = ['levelId', 'platforms', 'spawns'];
+function validateUserData(data) {
+  const required = ['id', 'email', 'name'];
 
   for (const field of required) {
     if (!data[field]) {
@@ -804,10 +792,10 @@ Before finalizing code:
 
 ## Resources
 
-### General Game Development
-- Gamasutra: https://www.gamasutra.com/
-- Game Programming Patterns: https://gameprogrammingpatterns.com/
-- HTML5 Game Devs: https://www.html5gamedevs.com/
+### General Web Development
+- Web.dev: https://web.dev/
+- Frontend Masters: https://frontendmasters.com/
+- CSS-Tricks: https://css-tricks.com/
 
 ### JavaScript Resources
 - MDN Web Docs: https://developer.mozilla.org/
@@ -822,4 +810,4 @@ Before finalizing code:
 
 **Last Updated:** 2025-10-31
 **Status:** Living document - update as needed
-**Applicable To:** Web-based game projects (all engines)
+**Applicable To:** Web-based software projects (all frameworks)

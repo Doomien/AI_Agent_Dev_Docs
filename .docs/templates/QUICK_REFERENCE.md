@@ -1,5 +1,5 @@
 # Quick Reference Card
-## Agent-Assisted Game Development
+## Agent-Assisted Software Development
 
 **Print this or keep it handy!**
 
@@ -132,8 +132,8 @@ Follow General_Engineering_Standards.md strictly
 ## Key Principles
 
 **Data-Driven Design**
-- Game logic ≠ Game data
-- Store data in JSON sidecar files
+- Application logic ≠ Application data
+- Store configuration in JSON files
 - Reference, don't hardcode
 
 **Role Separation**

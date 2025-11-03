@@ -357,21 +357,21 @@ Defer until project maturity increases and manual testing becomes bottleneck.
 ### Concept
 
 Build lightweight visual testing tools (beyond browser-based):
-- Animation viewer
-- Sprite placement tool
-- Collision box visualizer
-- Pathfinding debugger
+- Component playground
+- API response viewer
+- State visualization tool
+- Performance profiler
 
 ### From Engineering Standards
 These are mentioned but not mandated. Could be valuable for:
-- Rapid iteration on game feel
+- Rapid iteration on application feel
 - Non-programmer contribution
-- Debugging complex systems
+- Debugging complex features
 
 ### Implementation Approach
 - Build as separate HTML pages
-- Load game data files
-- Visualize without full game context
+- Load application data files
+- Visualize without full application context
 - Create when specific pain point emerges
 
 ---
@@ -410,8 +410,8 @@ Single generalized IC_Agent works fine for solo dev scale.
 
 ## Proposed: Fractal Documentation Pattern
 
-**Status:** IDEA  
-**Priority:** Low  
+**Status:** IDEA
+**Priority:** Low
 **Complexity:** High
 
 ### Concept
@@ -448,11 +448,11 @@ Needs more real-world use to determine if formalization helps or hinders.
 
 ## Rejected Ideas
 
-### [REJECTED - 2025-10-31] Separate Creative Director Role
+### [REJECTED - 2025-10-31] Separate Product Owner Role
 
-**Reason:** Solo dev makes creative decisions directly. AI assists with implementation, not creative vision.
+**Reason:** Solo dev makes product decisions directly. AI assists with implementation, not product vision.
 
-**Context:** Considered for maintaining creative consistency, but adds unnecessary abstraction when human is the creative authority.
+**Context:** Considered for maintaining product consistency, but adds unnecessary abstraction when human is the product authority.
 
 ---
 
@@ -474,7 +474,7 @@ Needs more real-world use to determine if formalization helps or hinders.
 1. At what project size does this process break down?
 2. When should multiple concurrent PM_Agent sessions be used?
 3. How to handle emergency bug fixes vs planned work?
-4. What about non-game projects using these patterns?
+4. How does this scale for enterprise projects with multiple developers?
 
 ---
 
