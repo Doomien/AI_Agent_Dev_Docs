@@ -1,28 +1,66 @@
 # Repository Contribution Protocols
 
-**ATTENTION AI AGENTS AND AUTOMATED TOOLS:**
-This repository follows a strict Feature Branch Workflow. You are NOT authorized to commit directly to the `main` branch. 
+**Canonical source of truth for git workflow in this repository.**
 
-Follow the protocols below for every session.
+## Policy
 
-## 1. Branching Strategy
-* **Production Branch:** `main` (READ ONLY for agents).
-* **Your Workspace:** You must create a new branch for every task.
+- `main` is protected and read-only for direct agent commits.
+- All work happens on a feature branch.
+- Merge to `main` happens through pull request review.
 
-### Branch Naming Convention
-Use the following format: `type/agent-task-description`
+## Branch Naming
 
-* **Prefixes:**
-    * `feature/` (New capabilities)
-    * `fix/` (Bug repairs)
-    * `docs/` (Documentation changes)
-    * `refactor/` (Code cleanup)
-* **Agent ID:** Identify yourself (e.g., `claude`, `gpt`, `local`, `homelab`).
-* **Example:** `feature/claude-add-login-button` or `fix/local-typo-correction`.
+Use: `type/agent-task-description`
 
-### Setup Command
-Before writing any code, execute:
+- `feature/` for new capabilities
+- `fix/` for bug fixes
+- `docs/` for documentation updates
+- `refactor/` for internal cleanup
+
+Examples:
+- `docs/gpt-add-agentroles-template`
+- `fix/local-correct-git-workflow-link`
+
+## Standard Workflow
+
+1. Sync `main`:
+
 ```bash
 git checkout main
 git pull origin main
-git checkout -b feature/[your-agent-name]-[task-slug]
+```
+
+2. Create a branch:
+
+```bash
+git checkout -b docs/[agent]-[task-slug]
+```
+
+3. Make scoped changes and validate them.
+4. Commit:
+
+```bash
+git add .
+git commit -m "docs: concise description of change"
+```
+
+5. Push branch and open pull request:
+
+```bash
+git push -u origin docs/[agent]-[task-slug]
+```
+
+6. Merge after review/approval. Do not merge directly from local shell unless explicitly authorized.
+
+## Pull Request Checklist
+
+- Scope is limited to the intended task.
+- References and links are valid.
+- No contradictory guidance introduced.
+- Documented behavior matches repository policy.
+
+## Notes for AI Agents
+
+- If instructions conflict across docs, follow this file.
+- If a doc appears stale, update it or link it back to this canonical protocol.
+
