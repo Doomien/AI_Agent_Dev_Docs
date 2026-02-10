@@ -2,7 +2,7 @@
 
 A starter template and reference for new Phaser game projects. Clone this structure when starting a new prototype to get consistent project layout, data-driven architecture, and standard tooling out of the box.
 
-**Related:** [tech-stack-recommendations.md](tech-stack-recommendations.md)
+**Related:** [tech-stack-recommendations.md](./tech-stack-recommendations.md)
 
 ---
 
@@ -17,7 +17,7 @@ cd my-game
 npm install
 
 # Add the project structure conventions
-mkdir -p src/game/objects src/game/systems src/utils data/entities data/levels data/config
+mkdir -p src/game/objects src/game/systems src/utils public/data/entities public/data/levels public/data/config
 ```
 
 After scaffolding, restructure to match the conventions below. The official template gives you the build tooling; this document adds the organizational patterns.
@@ -34,7 +34,7 @@ my-game/
 ├── vite.config.ts
 │
 ├── public/
-│   └── assets/                # Static game assets (served as-is by Vite)
+│   ├── assets/                # Static game assets (served as-is by Vite)
 │       ├── sprites/           # Individual sprites and sprite sheets
 │       │   ├── player.png
 │       │   └── player.json    # Atlas JSON (if using texture packer)
@@ -44,16 +44,16 @@ my-game/
 │       ├── maps/              # Tiled tilemap exports (.json)
 │       ├── fonts/             # Bitmap fonts
 │       └── ui/                # UI elements, backgrounds, menus
-│
-├── data/                      # JSON game data (entity defs, level configs)
-│   ├── entities/              # Entity definitions
-│   │   ├── player.json
-│   │   ├── enemy-slime.json
-│   │   └── item-health-potion.json
-│   ├── levels/                # Level/scene configuration
-│   │   └── level-01.json
-│   └── config/                # Game settings, difficulty curves
-│       └── game-settings.json
+│   └── data/                  # Runtime JSON loaded by URL
+│       ├── entities/          # Entity definitions
+│       │   ├── player.json
+│       │   ├── enemy-slime.json
+│       │   └── item-health-potion.json
+│       ├── levels/            # Level/scene configuration
+│       │   └── level-01.json
+│       └── config/            # Game settings, manifests, difficulty curves
+│           ├── asset-manifest.json
+│           └── game-settings.json
 │
 ├── src/
 │   ├── main.ts                # Application bootstrap
@@ -105,7 +105,7 @@ new Game(gameConfig);
 Central Phaser configuration. All scenes are registered here.
 
 ```typescript
-import { Types } from 'phaser';
+import Phaser, { Types } from 'phaser';
 import { BootScene } from './scenes/BootScene';
 import { PreloadScene } from './scenes/PreloadScene';
 import { MenuScene } from './scenes/MenuScene';
@@ -134,7 +134,7 @@ export const gameConfig: Types.Core.GameConfig = {
 
 ### `src/game/scenes/BootScene.ts`
 
-First scene to run. Loads the asset manifest (a JSON file listing all assets to preload), then transitions to PreloadScene.
+First scene to run. Loads the asset manifest and base game settings, then transitions to PreloadScene.
 
 ```typescript
 import { Scene } from 'phaser';
@@ -145,8 +145,8 @@ export class BootScene extends Scene {
   }
 
   preload() {
-    // Load the asset manifest and any data files
-    this.load.json('asset-manifest', 'data/config/game-settings.json');
+    this.load.json('asset-manifest', '/data/config/asset-manifest.json');
+    this.load.json('game-settings', '/data/config/game-settings.json');
   }
 
   create() {
@@ -178,8 +178,8 @@ export class PreloadScene extends Scene {
     });
 
     // Load game data
-    this.load.json('player-data', 'data/entities/player.json');
-    this.load.json('level-data', 'data/levels/level-01.json');
+    this.load.json('player-data', '/data/entities/player.json');
+    this.load.json('level-data', '/data/levels/level-01.json');
 
     // Load sprites
     this.load.spritesheet('player', 'assets/sprites/player.png', {
@@ -232,9 +232,9 @@ export class GameScene extends Scene {
 
 ## Entity Definition Format
 
-Entity definitions live in `data/entities/` as individual JSON files. One file per entity.
+Entity definitions live in `public/data/entities/` as individual JSON files. One file per entity.
 
-### Example: `data/entities/player.json`
+### Example: `public/data/entities/player.json`
 
 ```json
 {
@@ -275,7 +275,7 @@ Entity definitions live in `data/entities/` as individual JSON files. One file p
 }
 ```
 
-### Example: `data/entities/enemy-slime.json`
+### Example: `public/data/entities/enemy-slime.json`
 
 ```json
 {
@@ -311,7 +311,7 @@ Entity definitions live in `data/entities/` as individual JSON files. One file p
 }
 ```
 
-### Example: `data/entities/item-health-potion.json`
+### Example: `public/data/entities/item-health-potion.json`
 
 ```json
 {
@@ -343,9 +343,9 @@ Entity definitions live in `data/entities/` as individual JSON files. One file p
 
 ## Level Configuration Format
 
-Level definitions live in `data/levels/`. They describe entity placements, not tilemap geometry (that lives in the Tiled export).
+Level definitions live in `public/data/levels/`. They describe entity placements, not tilemap geometry (that lives in the Tiled export).
 
-### Example: `data/levels/level-01.json`
+### Example: `public/data/levels/level-01.json`
 
 ```json
 {
@@ -392,7 +392,7 @@ The `properties` object in entity placements allows per-instance overrides of th
 
 ## Game Settings
 
-### Example: `data/config/game-settings.json`
+### Example: `public/data/config/game-settings.json`
 
 ```json
 {
@@ -488,10 +488,10 @@ npm create @phaserjs/game@latest my-game
 When starting a new game project:
 
 - [ ] Scaffold with `npm create @phaserjs/game@latest`
-- [ ] Create `data/entities/`, `data/levels/`, `data/config/` directories
+- [ ] Create `public/data/entities/`, `public/data/levels/`, `public/data/config/` directories
 - [ ] Create `src/game/objects/`, `src/game/systems/` directories
 - [ ] Set up the Boot → Preload → Menu → Game scene flow
-- [ ] Define initial entities as JSON files in `data/entities/`
+- [ ] Define initial entities as JSON files in `public/data/entities/`
 - [ ] Initialize git repo with the `.gitignore` above
 - [ ] Create a feature branch for development (do not commit to main)
 - [ ] (Optional) Clone shared-game-utils into `src/shared/`

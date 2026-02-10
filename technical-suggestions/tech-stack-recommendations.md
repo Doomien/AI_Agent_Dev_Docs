@@ -91,8 +91,7 @@ Use a relaxed config that provides value without friction. Strict mode can be en
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "noEmit": true
   },
   "include": ["src"]
 }
@@ -148,18 +147,22 @@ pnpm is a valid alternative if a team member prefers it — all Phaser tooling s
 
 ### Phaser Project Template
 
-See [phaser-project-template.md](phaser-project-template.md) for a complete starter template with directory layout, file conventions, and example files.
+See [phaser-project-template.md](./phaser-project-template.md) for a complete starter template with directory layout, file conventions, and example files.
 
 The key structural conventions:
 
 ```
 my-game/
 ├── public/
-│   └── assets/              # Static assets (images, audio, tilemaps)
+│   ├── assets/              # Static assets (images, audio, tilemaps)
 │       ├── sprites/
 │       ├── audio/
 │       ├── maps/
 │       └── fonts/
+│   └── data/                # Runtime JSON loaded by URL in Phaser
+│       ├── entities/
+│       ├── levels/
+│       └── config/
 ├── src/
 │   ├── main.ts              # Application entry point
 │   ├── game/
@@ -171,9 +174,7 @@ my-game/
 │   │   │   └── GameScene.ts
 │   │   ├── objects/         # Game object classes (players, enemies, items)
 │   │   └── systems/         # Game systems (collision, scoring, spawning)
-│   ├── data/                # JSON game data (entity defs, level configs)
 │   └── utils/               # Shared helpers
-├── data/                    # JSON sidecar files (entity definitions, configs)
 ├── package.json
 ├── tsconfig.json
 ├── vite.config.ts
@@ -184,6 +185,7 @@ my-game/
 - **One scene per file** in `src/game/scenes/`
 - **Game data lives in JSON**, not hardcoded in game logic (see [Data-Driven Architecture](#5-data-driven-architecture))
 - **Assets in `public/assets/`** — Vite serves these statically
+- **Runtime data in `public/data/`** — Phaser can load these files by URL
 - **No god objects** — break game logic into focused systems and objects
 
 ### Godot Project Structure
@@ -232,10 +234,10 @@ This enables:
 
 ### JSON Sidecar Pattern
 
-Store game data in a `data/` directory as JSON files alongside (or within) the project:
+For Phaser + Vite, store runtime-loaded game data in `public/data/`:
 
 ```
-data/
+public/data/
 ├── entities/
 │   ├── player.json
 │   ├── enemy-slime.json
@@ -298,8 +300,8 @@ For maximum interoperability, entity definitions should follow a consistent stru
 ```typescript
 // In PreloadScene
 preload() {
-  this.load.json('player-data', 'data/entities/player.json');
-  this.load.json('level-data', 'data/levels/level-01.json');
+  this.load.json('player-data', '/data/entities/player.json');
+  this.load.json('level-data', '/data/levels/level-01.json');
 }
 
 // In GameScene
@@ -506,7 +508,7 @@ Godot exports to native executables directly — no wrapper needed. Use the Expo
 
 ### Git Conventions
 
-Every project should have a git repository. Use the branching and commit conventions from [Sandbox/contributing.md](Sandbox/contributing.md).
+Every project should have a git repository. Use the branching and commit conventions from [Sandbox/contributing.md](../Sandbox/contributing.md).
 
 ### .gitignore Essentials
 
@@ -582,6 +584,6 @@ A summary for fast decision-making:
 
 ## Related Documents
 
-- [phaser-project-template.md](phaser-project-template.md) — Starter template for new Phaser projects
-- [Sandbox/contributing.md](Sandbox/contributing.md) — Git workflow and branching conventions
-- [.docs/templates/General Engineering Standards.md](.docs/templates/General%20Engineering%20Standards.md) — Code organization and naming standards
+- [phaser-project-template.md](./phaser-project-template.md) — Starter template for new Phaser projects
+- [Sandbox/contributing.md](../Sandbox/contributing.md) — Git workflow and branching conventions
+- [.docs/templates/General Engineering Standards.md](../.docs/templates/General%20Engineering%20Standards.md) — Code organization and naming standards
