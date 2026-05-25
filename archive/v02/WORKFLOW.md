@@ -1,5 +1,10 @@
 # Agent Workflow Guide
 
+**Owner:** Workflow lead  
+**Status:** Active  
+**Last Updated:** February 9, 2026  
+**Source of Truth:** `v02/WORKFLOW.md` for session rules and role behavior
+
 **Version:** 2.0 | **Purpose:** Multi-agent collaboration on shared codebases
 
 ---
@@ -43,9 +48,9 @@
 
 ## Non-Negotiable References
 
-- Follow engineering quality standards from `General Engineering Standards.md`.
-- Follow git policy from `Sandbox/contributing.md`.
-- If workflow instructions conflict, `Sandbox/contributing.md` is canonical for git process.
+- Follow engineering quality standards from `general-engineering-standards.md`.
+- Follow git policy from `guides/contributing.md`.
+- If workflow instructions conflict, `guides/contributing.md` is canonical for git process.
 
 ---
 
@@ -107,6 +112,9 @@ When updating CONTEXT.md, use this format:
 **Next:** What the next agent should do or know  
 **Gotchas:** Any surprises or non-obvious things  
 ```
+
+For PM-to-IC planning handoffs, fill and attach:
+- [`HANDOFF_TEMPLATE.md`](./HANDOFF_TEMPLATE.md)
 
 ---
 

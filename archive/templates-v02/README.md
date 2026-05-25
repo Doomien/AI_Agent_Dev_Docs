@@ -40,8 +40,8 @@ This is a minimal documentation framework designed for **multiple AI agents** wo
 
 v02 is intentionally minimal. Keep these as mandatory companion docs:
 
-- Engineering quality standards: `docs/General Engineering Standards.md`
-- Canonical git workflow: `Sandbox/contributing.md`
+- Engineering quality standards: `docs/general-engineering-standards.md`
+- Canonical git workflow: `guides/contributing.md`
 
 ## Comparison to v01
 

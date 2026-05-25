@@ -1,78 +1,63 @@
 # AI Agent Dev Docs
 
-Documentation system for AI-assisted solo software development.
+Documentation system and templates for AI-assisted software development.
+
+**Cold-start for AI agents:** [`AGENTS.md`](AGENTS.md).
 
 ## Start Here
 
-1. Read the v01 product definition: [`v01/PRODUCT_V1.md`](v01/PRODUCT_V1.md)
-2. Read the v01 execution plan: [`v01/BACKLOG_2_WEEKS.md`](v01/BACKLOG_2_WEEKS.md)
-3. Use the current lightweight framework in [`v02/`](v02)
-4. Review generic technical guidance in [`technical-suggestions/`](technical-suggestions)
-5. Browse research and non-operational docs in [`references/`](references)
+1. **Read the contribution rules:** [`guides/contributing.md`](guides/contributing.md) — git workflow and PR policy.
+2. **Run a session using the framework:** [`templates/README.md`](templates/README.md) — PM/IC/QA loop, cadence, compaction.
+3. **Progressive deployment patterns:** [`guides/microservice-workflow-guide.md`](guides/microservice-workflow-guide.md) — static → homelab → Docker → GitHub.
+4. **Code style baseline:** [`templates/general-engineering-standards.md`](templates/general-engineering-standards.md).
+
+---
 
 ## Docs Map
 
-### v01 (verbose planning baseline)
+### Operational guides (`guides/`)
 
-Use `v01` when you need full context, rationale, and explicit success criteria.
+Day-to-day rules and procedures:
+- [Canonical git workflow](guides/contributing.md) — branching, commit format (Conventional Commits), PR checklist.
+- [Git quick reference](guides/git_procedures.md) — short CLI cheat sheet.
+- [Microservice workflow guide](guides/microservice-workflow-guide.md) — progressive deployment.
 
-- Product definition: [`v01/PRODUCT_V1.md`](v01/PRODUCT_V1.md)
-- Initial execution backlog: [`v01/BACKLOG_2_WEEKS.md`](v01/BACKLOG_2_WEEKS.md)
+### Framework templates (`templates/`)
 
-### v02 (operational day-to-day workflow)
+Canonical framework for agent-assisted projects. Copy into a new project's `docs/`.
+- [Framework overview](templates/README.md)
+- [Session workflow](templates/WORKFLOW.md) — PM/IC/QA, cadence, compaction, lightweight track.
+- [CONTEXT.md template](templates/CONTEXT.md), [PROGRESS.md template](templates/PROGRESS.md), [HANDOFF.md template](templates/HANDOFF.md)
+- [General engineering standards](templates/general-engineering-standards.md)
+- [Devlog template](templates/Devlog_TEMPLATE.md), [Project plan template](templates/ProjectPlan/)
 
-Use `v02` during active implementation cycles with one or more agents.
+### Technical suggestions (`technical-suggestions/`)
 
-- Framework overview: [`v02/README.md`](v02/README.md)
-- Workflow rules: [`v02/WORKFLOW.md`](v02/WORKFLOW.md)
-- Active context: [`v02/CONTEXT.md`](v02/CONTEXT.md)
-- Progress and task status: [`v02/PROGRESS.md`](v02/PROGRESS.md)
-- Planning to execution handoff template: [`v02/HANDOFF_TEMPLATE.md`](v02/HANDOFF_TEMPLATE.md)
-- v01 to v02 migration notes: [`v02/MIGRATION_NOTES.md`](v02/MIGRATION_NOTES.md)
+- [Tech stack recommendations](technical-suggestions/tech-stack-recommendations.md) — Godot vs. Phaser decision matrix.
+- [Phaser project starter](technical-suggestions/phaser-project-template.md).
 
-### references (research and non-operational material)
+### Research & memos (`references/`)
 
-Use `references` for analysis, recommendations, and background reading.
+Background and proposals, not operational:
+- [References index](references/README.md)
+- [Claude recommendations](references/claude-recommendations.md)
+- [Cursor recommendations](references/cursor-recommendations.md)
+- [The case for custom AI tooling](references/the-case-for-custom-ai-tooling.md)
+- [Improvement proposal 052526](references/improvement-proposal-052526.md) — partially integrated; see header for status.
 
-- Reference index: [`references/README.md`](references/README.md)
+### Archive (`archive/`)
 
-### technical-suggestions (reusable engineering guidance)
+Deprecated v01/v02 execution state and earlier framework versions. Not for active use — see [archive README](archive/README.md).
 
-Use `technical-suggestions` for baseline technical decision support that can be reused across projects.
-
-- Tech stack guidance: [`technical-suggestions/tech-stack-recommendations.md`](technical-suggestions/tech-stack-recommendations.md)
-- Phaser starter conventions: [`technical-suggestions/phaser-project-template.md`](technical-suggestions/phaser-project-template.md)
+---
 
 ## What This Repository Provides
 
-- A docs operating system for running PM/IC-style agent sessions
-- Standard templates for plan, handoff, context continuity, and engineering standards
-- Operational guidance for contribution and workflow improvements
+- **A docs operating system** for structured PM/IC/QA agent sessions with strict context budgets.
+- **Standard templates** for project plans, progress tracking, and handoffs.
+- **Engineering standards** that work across web frameworks.
 
 ## Who This Is For
 
-- Solo developers using AI agents for day-to-day implementation
-- Teams validating agent-assisted workflows before broader adoption
-
-## Current Scope (v1)
-
-v1 focuses on one outcome: predictable session execution with reliable handoffs.
-
-In scope:
-- Fast onboarding into a working docs workflow
-- Clear role boundaries between planning and implementation sessions
-- Canonical, non-conflicting contribution workflow
-- A worked example docs set
-
-Out of scope:
-- Full project management platform features
-- Multi-team governance and enterprise policy layers
-- Advanced automation infrastructure
-
-## Long-Term Direction
-
-- Build generic technical suggestion docs for decisions like tech stack selection.
-- Evolve a shared baseline into customized documentation sets for different project types.
-- Focus early customization on internal tools for small, casual video game prototyping teams.
-- Improve systems engineering and architecture coherence to increase interoperability.
-- Reduce technical troubleshooting overhead so the team can spend more time building game experiences.
+- Solo developers using AI agents for day-to-day implementation.
+- Teams validating agent-assisted workflows.

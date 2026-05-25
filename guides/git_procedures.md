@@ -3,7 +3,7 @@
 This file is a quick reference only.
 
 For the canonical and complete workflow, use:
-- [`Sandbox/contributing.md`](contributing.md)
+- [`guides/contributing.md`](contributing.md)
 
 ## Quick Command Sequence
 

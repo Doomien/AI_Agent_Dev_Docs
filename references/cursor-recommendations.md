@@ -33,15 +33,15 @@ Create a comprehensive README that:
 This repository contains guides and protocols for AI-assisted software development.
 
 ## Quick Navigation
-- [Contribution Guide](Sandbox/contributing.md) - How to contribute (AI agents & humans)
-- [Microservice Workflow](Sandbox/microservice-workflow-guide.md) - Progressive enhancement workflow
-- [Custom AI Tooling](Sandbox/The%20Case%20for%20Custom%20AI%20Tooling.md) - Philosophy & patterns
+- [Contribution Guide](guides/contributing.md) - How to contribute (AI agents & humans)
+- [Microservice Workflow](guides/microservice-workflow-guide.md) - Progressive enhancement workflow
+- [Custom AI Tooling](references/the-case-for-custom-ai-tooling.md) - Philosophy & patterns
 
 ## For AI Agents
-Start with [contributing.md](Sandbox/contributing.md) to understand repository protocols.
+Start with [contributing.md](../guides/contributing.md) to understand repository protocols.
 
 ## For Human Developers
-[Microservice Workflow Guide](Sandbox/microservice-workflow-guide.md) provides a complete development workflow.
+[Microservice Workflow Guide](../guides/microservice-workflow-guide.md) provides a complete development workflow.
 ```
 
 #### 1.2 Reorganize Directory Structure
