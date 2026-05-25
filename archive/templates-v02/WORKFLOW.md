@@ -48,9 +48,9 @@
 
 ## Non-Negotiable References
 
-- Follow engineering quality standards from `General Engineering Standards.md`.
-- Follow git policy from `Sandbox/contributing.md`.
-- If workflow instructions conflict, `Sandbox/contributing.md` is canonical for git process.
+- Follow engineering quality standards from `general-engineering-standards.md`.
+- Follow git policy from `guides/contributing.md`.
+- If workflow instructions conflict, `guides/contributing.md` is canonical for git process.
 
 ---
 

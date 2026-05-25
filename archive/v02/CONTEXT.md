@@ -1,5 +1,10 @@
 # Context
 
+**Owner:** IC agent on current session  
+**Status:** Active  
+**Last Updated:** February 9, 2026  
+**Source of Truth:** `v02/CONTEXT.md` for current implementation state and recent handoffs
+
 **Project:** [Project Name]  
 **Last Updated:** [Date]  
 **Current State:** 🟢 Working / 🟡 In Progress / 🔴 Broken

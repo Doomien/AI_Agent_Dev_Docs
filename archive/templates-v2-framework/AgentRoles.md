@@ -53,7 +53,7 @@ If a task requires both roles, split into two sessions with a handoff in between
 
 ### IC_Agent Must
 
-- Follow `ProjectPlan.md`, `Handoff.md`, and `General Engineering Standards.md`.
+- Follow `ProjectPlan.md`, `Handoff.md`, and `general-engineering-standards.md`.
 - Preserve role boundaries and escalate architecture changes.
 - Document deviations, blockers, and unresolved risks.
 - Keep changes scoped to assigned tasks.

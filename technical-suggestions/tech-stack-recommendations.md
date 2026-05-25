@@ -508,7 +508,7 @@ Godot exports to native executables directly — no wrapper needed. Use the Expo
 
 ### Git Conventions
 
-Every project should have a git repository. Use the branching and commit conventions from [Sandbox/contributing.md](../Sandbox/contributing.md).
+Every project should have a git repository. Use the branching and commit conventions from [guides/contributing.md](../guides/contributing.md).
 
 ### .gitignore Essentials
 
@@ -585,5 +585,5 @@ A summary for fast decision-making:
 ## Related Documents
 
 - [phaser-project-template.md](./phaser-project-template.md) — Starter template for new Phaser projects
-- [Sandbox/contributing.md](../Sandbox/contributing.md) — Git workflow and branching conventions
-- [.docs/templates/General Engineering Standards.md](../.docs/templates/General%20Engineering%20Standards.md) — Code organization and naming standards
+- [guides/contributing.md](../guides/contributing.md) — Git workflow and branching conventions
+- [templates/general-engineering-standards.md](../templates/general-engineering-standards.md) — Code organization and naming standards

@@ -1,5 +1,10 @@
 # Agent Documentation Framework v02
 
+**Owner:** Workflow lead  
+**Status:** Active  
+**Last Updated:** February 9, 2026  
+**Source of Truth:** `v02/README.md` for v02 structure and usage
+
 **Streamlined multi-agent collaboration for shared codebases**
 
 ---
@@ -15,6 +20,8 @@ This is a minimal documentation framework designed for **multiple AI agents** wo
 | [WORKFLOW.md](./WORKFLOW.md) | How agents should work | Static reference |
 | [CONTEXT.md](./CONTEXT.md) | Current state + recent handoffs | < 100 lines |
 | [PROGRESS.md](./PROGRESS.md) | What's planned + what's done | Living document |
+| [HANDOFF_TEMPLATE.md](./HANDOFF_TEMPLATE.md) | Planning-to-execution handoff contract | Per handoff |
+| [MIGRATION_NOTES.md](./MIGRATION_NOTES.md) | v01 -> v02 migration guidance | Read once per project |
 
 ## Key Principles
 
@@ -33,14 +40,14 @@ This is a minimal documentation framework designed for **multiple AI agents** wo
 
 v02 is intentionally minimal. Keep these as mandatory companion docs:
 
-- Engineering quality standards: `docs/General Engineering Standards.md`
-- Canonical git workflow: `Sandbox/contributing.md`
+- Engineering quality standards: `docs/general-engineering-standards.md`
+- Canonical git workflow: `guides/contributing.md`
 
 ## Comparison to v01
 
 | Aspect | v01 | v02 |
 |--------|-----|-----|
-| Document count | 6 files | 3 files |
+| Document count | 6 files | 5 files |
 | Workflow guide | 550+ lines | ~100 lines |
 | Focus | Solo dev with AI | Multi-agent collaboration |
 | Handoff model | Separate Handoff.md | Integrated into CONTEXT.md |

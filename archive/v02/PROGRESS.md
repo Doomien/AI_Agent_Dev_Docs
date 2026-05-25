@@ -1,5 +1,10 @@
 # Progress
 
+**Owner:** PM agent for current planning cycle  
+**Status:** Active  
+**Last Updated:** February 9, 2026  
+**Source of Truth:** `v02/PROGRESS.md` for task status and prioritization
+
 **Project:** [Project Name]  
 **Current Phase:** [Phase Name]
 
