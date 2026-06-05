@@ -43,7 +43,7 @@ T2–T4 are specified in the companion roadmap. **This document specifies T1 onl
 
 ### 3.1 The Stable Seam (fixed at T1, never broken)
 
-1. **Artifact contract.** Every stage transition produces a named markdown artifact in a known location. The set of required artifacts per stage does not change across tiers — later tiers may *generate* them, never relocate or rename them.
+1. **Artifact contract.** Every stage transition produces a named markdown artifact in a known location. The Tier 1 artifact names and locations remain canonical across tiers. Later tiers may add optional artifacts such as adapter logs, PR metadata, CI summaries, or runtime transcripts, but they must not rename, relocate, or replace the Tier 1 artifacts.
 2. **Gate contract.** The seven gates (§6) and their boolean state in `project_state.json` are fixed. Automation may *set* a gate; it may not invent a new gate ordering.
 3. **Slice layout.** A slice is a directory `slices/<slice-id>/` containing a fixed file set plus `slice.json` (§5.2). This single decision resolves the short-term-vs-long-term layout seam up front: flat enough to author by hand, structured enough for a later CLI to walk.
 4. **Roles, not models.** The four roles (§7) are defined by their input/output contract, never by model identity. T3 adapters bind a role to a runtime; the role contract is unchanged.
@@ -160,6 +160,7 @@ Human-editable durable checklist — *not* a scheduler.
   "gates": {
     "vision_approved": false,
     "spec_reviewed": false,
+    "engineering_reviewed": false,
     "plan_locked": false,
     "implementation_complete": false,
     "code_review_approved": false,
@@ -182,7 +183,7 @@ Gates must be honored in order; T1 enforcement is **manual** (a human or agent c
 |---|------------------|-------------------|-------------|
 | A | `vision_approved` | `vision_brief.md` | Human / PM Agent |
 | B | `spec_reviewed` | `spec.md` (+ `roadmap.md`) | Human + PM Agent |
-| C | (preflight) | `engineering_review.md` | Senior Dev Agent |
+| C | `engineering_reviewed` | `engineering_review.md` | Senior Dev Agent |
 | D | `plan_locked` | locked spec + roadmap + first `slices/slice_001/handoff.md` | Human |
 | E | `code_review_approved` | `slices/<id>/code_review.md` | Senior Dev Agent |
 | F | `product_accepted` | `slices/<id>/acceptance_report.md` | PM Agent (+ human for judgment) |
