@@ -25,6 +25,7 @@ A full README rewrite is queued as WO-0005; this page is the reconciled v4 ident
 - [Capability map](capability-map.md) — derived status surface for features and orders.
 - [Ledger](ledger.md) — open questions and deferred decisions.
 - [Work-order template](templates/work-order.md) + [frontmatter schema](schemas/work-order.schema.json).
+- [Validation playbook](playbooks/validation-checklist.md) — closeout checklist for `review → complete`.
 - [Changelog](CHANGELOG.md) — framework version history.
 
 ### Operational guides (`guides/`)

@@ -22,6 +22,7 @@ Don't read these reflexively — fetch when relevant.
 | Find active or queued work | [`capability-map.md`](capability-map.md) + [`work-orders/`](work-orders/) |
 | Check open questions / deferred decisions | [`ledger.md`](ledger.md) |
 | Cut a new work order | [`templates/work-order.md`](templates/work-order.md) + [`schemas/work-order.schema.json`](schemas/work-order.schema.json) |
+| Validate a work order before closeout | [`playbooks/validation-checklist.md`](playbooks/validation-checklist.md) |
 | Commit, push, open a PR | [`guides/contributing.md`](guides/contributing.md) |
 | Write a tiered spec or roadmap | [`guides/tier-epic-specification-framework.md`](guides/tier-epic-specification-framework.md) |
 | Log architecture decisions | [`skills/architecture-decision-records/SKILL.md`](skills/architecture-decision-records/SKILL.md) — invoke as `/architecture-decision-records` |
